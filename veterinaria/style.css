@@ -1,0 +1,154 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* General */
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f9fc;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  header {
+    background-color: #a2d2ff;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  header h1 {
+    font-size: 2rem;
+  }
+  
+  nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  
+  nav a:hover {
+    color: #ffcad4;
+  }
+  
+  main {
+    padding: 2rem;
+  }
+  
+  h2, h3 {
+    color: #333;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  p {
+    color: #666;
+    text-align: center;
+    margin: 1rem auto;
+    max-width: 600px;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  ul li {
+    padding: 0.8rem 0;
+    font-size: 1.1rem;
+    color: #444;
+    background: #edf2fb;
+    border-radius: 8px;
+    margin: 0.5rem 0;
+    text-align: center;
+    transition: background 0.3s;
+  }
+  
+  ul li:hover {
+    background: #d7e3fc;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #edf2fb;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 2rem auto;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-top: 1rem;
+    color: #333;
+  }
+  
+  input, textarea {
+    width: 100%;
+    padding: 0.7rem;
+    margin-top: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline-color: #a2d2ff;
+  }
+  
+  button {
+    background-color: #ffcad4;
+    color: #fff;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: background 0.3s;
+  }
+  
+  button:hover {
+    background-color: #ff8c94;
+  }
+  
+  footer {
+    background-color: #a2d2ff;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    main {
+      padding: 1rem;
+    }
+  
+    header h1 {
+      font-size: 1.5rem;
+    }
+  
+    ul li {
+      font-size: 1rem;
+    }
+  
+    form {
+      padding: 1.5rem;
+    }
+  }
+  .description {
+    display: none;
+    margin-top: 0.5rem;
+    color: #555;
+  }
+    

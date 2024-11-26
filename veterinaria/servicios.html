@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🐶 Clínica Samoyedísima 🐾</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <h1>🐶 Clínica Samoyedísima 🐾</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Nuestros Servicios 🛠️</h2>
+      <ul>
+        <li>
+          🩺 <strong>Consultas Generales</strong> 
+          <button onclick="toggleDescription('consulta')">Ver más</button>
+          <p id="consulta" class="description">Desde revisiones regulares hasta cuidados especializados, nuestros veterinarios están capacitados para cualquier situación.</p>
+        </li>
+        <li>
+          🦷 <strong>Higiene Dental</strong>
+          <button onclick="toggleDescription('dental')">Ver más</button>
+          <p id="dental" class="description">Ofrecemos servicios de limpieza dental para que tu Samoyedo mantenga una sonrisa saludable y libre de mal aliento.</p>
+        </li>
+        <li>
+          🏋️ <strong>Entrenamiento</strong>
+          <button onclick="toggleDescription('entrenamiento')">Ver más</button>
+          <p id="entrenamiento" class="description">Clases de obediencia y entrenamiento diseñadas exclusivamente para la personalidad única de los Samoyedos.</p>
+        </li>
+        <li>
+          🛁 <strong>Grooming</strong>
+          <button onclick="toggleDescription('grooming')">Ver más</button>
+          <p id="grooming" class="description">Cuidamos del hermoso pelaje de tu Samoyedo con productos específicos y técnicas adecuadas para su tipo de pelo.</p>
+        </li>
+        <li>
+          🛌 <strong>Hospedaje y Guardería</strong>
+          <button onclick="toggleDescription('hospedaje')">Ver más</button>
+          <p id="hospedaje" class="description">Cuando necesites un lugar seguro y confiable, ofrecemos hospedaje con atención personalizada.</p>
+        </li>
+      </ul>
+    </section>
+  </main>  
+
+  <footer>
+    <p>Clínica Samoyedísima 🐾 - Donde cada Samoyedo es parte de la familia 💙</p>
+  </footer>
+</body>
+<script src="script.js"></script>
+
+</html>

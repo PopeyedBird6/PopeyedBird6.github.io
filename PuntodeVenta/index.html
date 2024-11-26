@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🐶 Tienda Samoyedísima🐾</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>🐶 Tienda Samoyedísima  🐾</h1>
+    <nav>
+      <button onclick="mostrarProductos()">Productos 🛒</button>
+      <button onclick="mostrarCarrito()">Carrito 🐾</button>
+    </nav>
+  </header>
+
+  <section id="productos">
+    <h2>Productos para tu Samoyedo Feliz 🐶</h2>
+    <input type="text" id="buscador" placeholder="Buscar productos..." oninput="buscarProductos()">
+    <div id="lista-categorias">
+      <!-- Las categorías y productos se generarán dinámicamente aquí -->
+    </div>
+  </section>
+
+  <section id="carrito" style="display: none;">
+    <h2>Tu carrito de felicidad 🐾</h2>
+    <table>
+      <tr>
+        <th>Emoji</th>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio Unitario</th>
+        <th>Total</th>
+        <th>Acción</th>
+      </tr>
+      <tbody id="carrito-items"></tbody>
+    </table>
+    <h3>Total: $<span id="total-carrito">0.00</span></h3>
+    <button onclick="finalizarCompra()">Pagar 💳</button>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
