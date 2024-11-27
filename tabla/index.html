@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futbolistas y Deportistas</title>
+    <style>
+        /* Estilo del cuerpo de la página */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 20px;
+        }
+        /* Contenedor principal */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(#B0C4DE, #FFFFFF);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        /* Estilo del título principal */
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        /* Grupo de formulario */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        /* Estilo para las etiquetas */
+        label {
+            display: block;
+            font-weight: bold;
+        }
+        /* Estilo de cajas de texto y combo */
+        input[type="text"], select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        /* Estilo de la tabla */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        /* Bordes de la tabla */
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        /* Espacio interior de celdas */
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        /* Estilo de los encabezados de tabla */
+        th {
+            background-color: #f2f2f2;
+        }
+        /* Estilo del botón */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        /* Cambio de color al pasar sobre el botón */
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        body {
+            background: linear-gradient();
+            background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
+            background-position: center; /* Centra la imagen */
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Futbolistas y Deportistas</h1>
+        
+        <!-- Campo de texto para el nombre -->
+        <div class="form-group">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" placeholder="Ingresa el nombre del futbolista">
+        </div>
+        
+        <!-- Campo de texto para el sueldo anual -->
+        <div class="form-group">
+            <label for="annualSalary">Sueldo Anual (€):</label>
+            <input type="text" id="annualSalary" placeholder="Ingresa el sueldo anual">
+        </div>
+        
+        <!-- Campo de texto para el sueldo mensual -->
+        <div class="form-group">
+            <label for="monthlySalary">Sueldo Mensual (€):</label>
+            <input type="text" id="monthlySalary" placeholder="Ingresa el sueldo mensual">
+        </div>
+        
+        <!-- Caja combo para seleccionar el continente -->
+        <div class="form-group">
+            <label for="continent">Continente:</label>
+            <select id="continent">
+                <option value="Europa">Europa</option>
+                <option value="Asia">Asia</option>
+                <option value="América">América</option>
+                <option value="África">África</option>
+                <option value="Oceanía">Oceanía</option>
+            </select>
+        </div>
+
+        <!-- Campo de texto para el país -->
+        <div class="form-group">
+            <label for="country">País:</label>
+            <input type="text" id="country" placeholder="Ingresa el país del futbolista">
+        </div>
+        
+        <!-- Campo de texto para la URL del club -->
+        <div class="form-group">
+            <label for="clubUrl">URL del Club:</label>
+            <input type="text" id="clubUrl" placeholder="Ingresa la URL del club">
+        </div>
+        
+        <!-- Botón para agregar datos -->
+        <button class="btn" onclick="addData()">Agregar Futbolista</button>
+        
+        <h2>Tabla de Futbolistas</h2>
+        <!-- Tabla donde se mostrarán los datos ingresados -->
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Sueldo Anual (€)</th>
+                    <th>Sueldo Mensual (€)</th>
+                    <th>Continente</th>
+                    <th>País</th>
+                    <th>Club actual</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Array para almacenar los datos de los futbolistas
+        let data = [
+            { name: "Lionel Messi", annualSalary: 70000000, monthlySalary: 5833333, continent: "Europa", country: "Argentina", clubUrl: "https://www.intermiamicf.com" },
+            { name: "Neymar Jr.", annualSalary: 80000000, monthlySalary: 6666666, continent: "Europa", country: "Brasil", clubUrl: "https://www.psg.fr" },
+        ];
+
+        // Función para agregar datos a la tabla
+        function addData() {
+            // Obtener valores de las cajas de texto y combo
+            const name = document.getElementById('name').value;
+            const annualSalary = document.getElementById('annualSalary').value;
+            const monthlySalary = document.getElementById('monthlySalary').value;
+            const continent = document.getElementById('continent').value;
+            const country = document.getElementById('country').value;
+            const clubUrl = document.getElementById('clubUrl').value;
+
+            // Validar que se hayan ingresado todos los campos
+            if (name === "" || annualSalary === "" || monthlySalary === "" || continent === "" || country === "" || clubUrl === "") {
+                alert("Por favor, completa todos los campos.");
+                return;
+            }
+
+            // Agregar los datos al array
+            data.push({
+                name,
+                annualSalary: parseFloat(annualSalary),
+                monthlySalary: parseFloat(monthlySalary),
+                continent,
+                country,
+                clubUrl
+            });
+
+            // Limpiar la tabla antes de llenarla de nuevo
+            const tableBody = document.querySelector("#dataTable tbody");
+            tableBody.innerHTML = "";
+
+            // Llenar la tabla con los datos actualizados
+            data.forEach(row => {
+                const tr = document.createElement('tr');
+                const tdName = document.createElement('td');
+                const tdAnnualSalary = document.createElement('td');
+                const tdMonthlySalary = document.createElement('td');
+                const tdContinent = document.createElement('td');
+                const tdCountry = document.createElement('td');
+                const tdClub = document.createElement('td');
+
+                tdName.textContent = row.name;
+                tdAnnualSalary.textContent = row.annualSalary.toLocaleString();
+                tdMonthlySalary.textContent = row.monthlySalary.toLocaleString();
+                tdContinent.textContent = row.continent;
+                tdCountry.textContent = row.country;
+                tdClub.innerHTML = `<a href="${row.clubUrl}" target="_blank">${row.clubUrl}</a>`;
+
+                tr.appendChild(tdName);
+                tr.appendChild(tdAnnualSalary);
+                tr.appendChild(tdMonthlySalary);
+                tr.appendChild(tdContinent);
+                tr.appendChild(tdCountry);
+                tr.appendChild(tdClub);
+                tableBody.appendChild(tr);
+            });
+
+            // Limpiar los campos de entrada
+            document.getElementById('name').value = "";
+            document.getElementById('annualSalary').value = "";
+            document.getElementById('monthlySalary').value = "";
+            document.getElementById('continent').value = "Europa"; // Restablecer el combo
+            document.getElementById('country').value = "";
+            document.getElementById('clubUrl').value = "";
+        }
+
+        // Inicializar la tabla con datos predefinidos
+        window.onload = function() {
+            addData(); // Para mostrar los datos iniciales en la tabla
+        };
+    </script>
+</body>
+</html>

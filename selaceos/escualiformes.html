@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Especies de Tiburones</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-blue-50">
+  <div id="app"></div>
+
+  <script>
+    const sharks = [
+      {
+        id: 1,
+        name: "Tiburón Blanco",
+        scientificName: "Carcharodon carcharias",
+        length: "4-6m",
+        weight: "2000kg",
+        habitat: "Oceánico",
+        diet: "Focas, leones marinos, peces",
+        conservation: "Vulnerable",
+        description: "El gran tiburón blanco es uno de los depredadores marinos más conocidos. Conocido por su tamaño y fuerza, es una especie crucial para el ecosistema marino.",
+        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3l7Qz8IIt2OedqeWPh6LAgPIOnM4iH8gtDw&s"
+      },
+      {
+        id: 2,
+        name: "Tiburón Martillo",
+        scientificName: "Sphyrna mokarran",
+        length: "3-6m",
+        weight: "500kg",
+        habitat: "Costero-pelágico",
+        diet: "Peces, calamares, crustáceos",
+        conservation: "En peligro",
+        description: "Reconocible por su distintiva cabeza en forma de martillo, que le proporciona una visión de 360 grados.",
+        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDNh-gBJaYUHutr7ZegApQh9YNRI4F4v4TRw&s"
+      },
+    ];
+
+    function createSharkCard(shark) {
+      return `
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                    <img src="${shark.imageUrl}" alt="${shark.name}" class="w-full h-64 object-cover rounded-lg mb-4">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-2">${shark.name}</h3>
+                    <p class="text-gray-600 italic mb-4">${shark.scientificName}</p>
+                    <p class="text-gray-700 mb-4">${shark.description}</p>
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <span class="font-bold">Tamaño:</span> ${shark.length}
+                        </div>
+                        <div>
+                            <span class="font-bold">Peso:</span> ${shark.weight}
+                        </div>
+                        <div>
+                            <span class="font-bold">Hábitat:</span> ${shark.habitat}
+                        </div>
+                        <div>
+                            <span class="font-bold">Estado:</span> ${shark.conservation}
+                        </div>
+                    </div>
+                </div>
+            `;
+    }
+
+    function createComparativeTable(sharks) {
+      return `
+                <div class="overflow-x-auto bg-white rounded-lg shadow-md p-6 mt-8">
+                    <h2 class="text-2xl font-bold text-blue-800 mb-4">Tabla Comparativa</h2>
+                    <table class="w-full">
+                        <thead class="bg-blue-100">
+                            <tr>
+                                <th class="px-4 py-2 text-left">Especie</th>
+                                <th class="px-4 py-2 text-left">Tamaño</th>
+                                <th class="px-4 py-2 text-left">Peso</th>
+                                <th class="px-4 py-2 text-left">Hábitat</th>
+                                <th class="px-4 py-2 text-left">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${sharks.map(shark => `
+                                <tr class="border-b hover:bg-blue-50">
+                                    <td class="px-4 py-2 font-medium">${shark.name}</td>
+                                    <td class="px-4 py-2">${shark.length}</td>
+                                    <td class="px-4 py-2">${shark.weight}</td>
+                                    <td class="px-4 py-2">${shark.habitat}</td>
+                                    <td class="px-4 py-2">${shark.conservation}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+    }
+
+    function renderApp() {
+      const app = document.getElementById('app');
+      app.innerHTML = `
+                <nav class="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg sticky top-0 z-50">
+                    <div class="max-w-7xl mx-auto px-4 py-4">
+                        <h1 class="text-2xl font-bold">🦈 Especies de Tiburones</h1>
+                    </div>
+                </nav>
+
+                <main class="max-w-7xl mx-auto px-4 py-8">
+                    <section id="introduction" class="mb-12">
+                        <h2 class="text-3xl font-bold text-blue-800 mb-6">Especies Destacadas</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            ${sharks.map(shark => createSharkCard(shark)).join('')}
+                        </div>
+                    </section>
+
+                    ${createComparativeTable(sharks)}
+                </main>
+
+                <footer class="bg-blue-800 text-white mt-8">
+                    <div class="max-w-7xl mx-auto px-4 py-6 text-center">
+                        <p>© 2024 Guía de Tiburones</p>
+                    </div>
+                </footer>
+            `;
+    }
+
+    sharks.push(
+      {
+        id: 3,
+        name: "Tiburón Tigre",
+        scientificName: "Galeocerdo cuvier",
+        length: "3-6m",
+        weight: "800kg",
+        habitat: "Tropical/Subtropical",
+        diet: "Variada",
+        conservation: "Casi amenazado",
+        description: "Conocido por su comportamiento agresivo y su capacidad para comer casi cualquier cosa.",
+        imageUrl: "https://content.nationalgeographic.com.es/medio/2022/03/02/mm8116-131207-00106_8a07a8ad_1280x851.jpg"
+      },
+      {
+        id: 4,
+        name: "Tiburón Ballena",
+        scientificName: "Rhincodon typus",
+        length: "12m",
+        weight: "19000kg",
+        habitat: "Tropical/Templado",
+        diet: "Plancton",
+        conservation: "En peligro",
+        description: "El pez más grande del mundo, aunque se alimenta principalmente de plancton.",
+        imageUrl: "https://static.nationalgeographicla.com/files/styles/image_3200/public/nationalgeographic2743334.webp?w=760&h=507"
+      },
+      {
+        id: 5,
+        name: "Tiburón Toro",
+        scientificName: "Carcharhinus leucas",
+        length: "2-3.5m",
+        weight: "130kg",
+        habitat: "Costero/Ríos",
+        diet: "Peces, otros tiburones",
+        conservation: "Casi amenazado",
+        description: "Único por su capacidad de sobrevivir en agua dulce y salada.",
+        imageUrl: "https://static.nationalgeographic.es/files/styles/image_3200/public/6900.600x450.jpg?w=1600"
+      },
+      {
+        id: 6,
+        name: "Tiburón Mako",
+        scientificName: "Isurus oxyrinchus",
+        length: "3-4m",
+        weight: "570kg",
+        habitat: "Oceánico",
+        diet: "Peces, calamares",
+        conservation: "En peligro",
+        description: "El tiburón más rápido, alcanzando velocidades de hasta 74 km/h.",
+        imageUrl: "https://cdn0.expertoanimal.com/es/razas/0/2/9/tiburon-mako_920_0_orig.jpg"
+      },
+      {
+        id: 7,
+        name: "Tiburón Zorro",
+        scientificName: "Alopias vulpinus",
+        length: "6m",
+        weight: "450kg",
+        habitat: "Pelágico",
+        diet: "Peces pequeños",
+        conservation: "Vulnerable",
+        description: "Reconocible por su cola extremadamente larga que usa para aturdir a sus presas.",
+        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkNXPMC7IoegZREEjsGvsDCNFDW8LjIMrgKg&s"
+      },
+      {
+        id: 8,
+        name: "Tiburón Peregrino",
+        scientificName: "Cetorhinus maximus",
+        length: "8-10m",
+        weight: "4000kg",
+        habitat: "Templado",
+        diet: "Plancton",
+        conservation: "Vulnerable",
+        description: "El segundo pez más grande del mundo, filtrador pasivo de plancton.",
+        imageUrl: "https://animales-acuaticos.com/wp-content/uploads/2022/05/Tiburon-peregrino.jpg"
+      },
+      {
+        id: 9,
+        name: "Tiburón Nodriza",
+        scientificName: "Ginglymostoma cirratum",
+        length: "2.5-3m",
+        weight: "110kg",
+        habitat: "Arrecifes",
+        diet: "Crustáceos, moluscos",
+        conservation: "Datos insuficientes",
+        description: "Especie nocturna que descansa en grupos durante el día.",
+        imageUrl: "https://www.oceanografic.org/wp-content/uploads/2019/02/especie-tiburon-nodriza-3.jpg"
+      },
+      {
+        id: 10,
+        name: "Tiburón Oceánico",
+        scientificName: "Carcharhinus longimanus",
+        length: "3-4m",
+        weight: "170kg",
+        habitat: "Oceánico",
+        diet: "Peces, calamares",
+        conservation: "Criticamente amenazado",
+        description: "Reconocible por sus largas aletas redondeadas con puntas blancas.",
+        imageUrl: "https://fordivers.store/cdn/shop/articles/Tiburon_longimanus.webp?v=1691572659"
+      }
+    );
+
+    document.addEventListener('DOMContentLoaded', renderApp);
+  </script>
+</body>
+
+</html>
