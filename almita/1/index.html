@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,150 +8,154 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         label {
-    display:block;
-    margin-top:20px;
-    letter-spacing:1px;
-}
- 
-.principal {
-    display:block;
-    margin:0 auto;
-    width:510px;
-    color: #666666;
-    font-family:Arial;
-}
- 
-form {
-    margin:0 auto;
-    width:400px;
-}
- 
-.cajas{
-    width:380px;
-    height:15px;
-    background:#666666;
-    border:2px solid #f6f6f6;
-    padding:10px;
-    margin-top:5px;
-    font-size:10px;
-    color:#ffffff;
-}
-select{
-    width:400px;
-    height:40px;
-    background:#666666;
-    border:2px solid #f6f6f6;
-    padding:10px;
-    margin-top:5px;
-    font-size:12px;
-    color:#ffffff;
-}
-textarea {
-    height:150px;
-}
- 
-.boton{
-    width:85px;
-    height:40px;
-    border:none;
-    margin-top:20px;
-    cursor:pointer;
-}
+            display: block;
+            margin-top: 20px;
+            letter-spacing: 1px;
+        }
+
+        .principal {
+            display: block;
+            margin: 0 auto;
+            width: 510px;
+            color: #666666;
+            font-family: Arial;
+        }
+
+        form {
+            margin: 0 auto;
+            width: 400px;
+        }
+
+        .cajas {
+            width: 380px;
+            height: 15px;
+            background: #666666;
+            border: 2px solid #f6f6f6;
+            padding: 10px;
+            margin-top: 5px;
+            font-size: 10px;
+            color: #ffffff;
+        }
+
+        select {
+            width: 400px;
+            height: 40px;
+            background: #666666;
+            border: 2px solid #f6f6f6;
+            padding: 10px;
+            margin-top: 5px;
+            font-size: 12px;
+            color: #ffffff;
+        }
+
+        textarea {
+            height: 150px;
+        }
+
+        .boton {
+            width: 85px;
+            height: 40px;
+            border: none;
+            margin-top: 20px;
+            cursor: pointer;
+        }
     </style>
 </head>
+
 <body>
     <div class="principal">
-    <form method="get" name="registro" onsubmit="return validar(this)" action="index.html">
-       
-        <label>Nombre:</label>
-        <input class="cajas" type="text" name="nombre" id="nombre"/>
-        <br>
-        <br>
-        <label>Edad:</label>
-        <input class="cajas" type="number" name="edad" id="edad"/>
-        <br>
-        <br>
-        <legend>Selecciona sexo:</legend>
-        
-        <blockquote>  
-            <label>Femenino</label>
-            <input class="cajas" type="radio" name="sexo" id="femenino" value="femenino"/>
-        
-            <label>Masculino</label>
-            <input class="cajas" type="radio" name="sexo" id="masculino" value="masculino"/>
-        </blockquote> 
-        
-        <label >
-            <span>Deporte favorito:</span>
-            <select id="deporte" name="deporte">
-              <option value="futbol">Futbol</option>
-              <option value="basquetbol">Basquetbol</option>
-              <option value="beisbol">Beisbol</option>
-              <option value="tenis">Tenis</option>
-              <option value="ninguno">Ninguno</option>
-            </select>
-        </label>
+        <form method="get" name="registro" onsubmit="return validar(this)" action="index.html">
 
-        <input class="boton" type="submit" id="enviar" value="Enviar">
-        <input class="boton" type="reset" id="reset" value="Reset">
+            <label>Nombre:</label>
+            <input class="cajas" type="text" name="nombre" id="nombre" />
+            <br>
+            <br>
+            <label>Edad:</label>
+            <input class="cajas" type="number" name="edad" id="edad" />
+            <br>
+            <br>
+            <legend>Selecciona sexo:</legend>
 
-    </form>
+            <blockquote>
+                <label>Femenino</label>
+                <input class="cajas" type="radio" name="sexo" id="femenino" value="femenino" />
+
+                <label>Masculino</label>
+                <input class="cajas" type="radio" name="sexo" id="masculino" value="masculino" />
+            </blockquote>
+
+            <label>
+                <span>Deporte favorito:</span>
+                <select id="deporte" name="deporte">
+                    <option value="futbol">Futbol</option>
+                    <option value="basquetbol">Basquetbol</option>
+                    <option value="beisbol">Beisbol</option>
+                    <option value="tenis">Tenis</option>
+                    <option value="ninguno">Ninguno</option>
+                </select>
+            </label>
+
+            <input class="boton" type="submit" id="enviar" value="Enviar">
+            <input class="boton" type="reset" id="reset" value="Reset">
+
+        </form>
     </div>
 </body>
 <script>
     function validar(form) {
-var Etiquetas = /<[^>]+>/g;
+        var Etiquetas = /<[^>]+>/g;
 
-// Validar nombre
-var nombre = form.nombre.value.trim();
-if (Etiquetas.test(nombre)) {
-    alert("El nombre no puede contener etiquetas HTML.");
-    form.nombre.value = ""; // Borrar contenido inválido
-    return false;
-}
-if (nombre === "") {
-    alert("Por favor, ingrese su nombre.");
-    return false;
-}
+        // Validar nombre
+        var nombre = form.nombre.value.trim();
+        if (Etiquetas.test(nombre)) {
+            alert("El nombre no puede contener etiquetas HTML.");
+            form.nombre.value = ""; // Borrar contenido inválido
+            return false;
+        }
+        if (nombre === "") {
+            alert("Por favor, ingrese su nombre.");
+            return false;
+        }
 
-// Validar edad
-var edad = form.edad.value.trim();
-if (Etiquetas.test(edad)) {
-    alert("La edad no puede contener etiquetas HTML.");
-    form.edad.value = ""; 
-    return false;
-}
-if (edad === "" || isNaN(edad) || edad <= 0) {
-    alert("Por favor, ingrese una edad válida.");
-    return false;
-}
+        // Validar edad
+        var edad = form.edad.value.trim();
+        if (Etiquetas.test(edad)) {
+            alert("La edad no puede contener etiquetas HTML.");
+            form.edad.value = "";
+            return false;
+        }
+        if (edad === "" || isNaN(edad) || edad <= 0) {
+            alert("Por favor, ingrese una edad válida.");
+            return false;
+        }
 
-// Validar selección de sexo
-var sexo = form.sexo.value;
-if (Etiquetas.test(sexo)) {
-    alert("El campo de sexo no puede contener etiquetas HTML.");
-    return false;
-}
-if (sexo === "") {
-    alert("Por favor, seleccione su sexo.");
-    return false;
-}
+        // Validar selección de sexo
+        var sexo = form.sexo.value;
+        if (Etiquetas.test(sexo)) {
+            alert("El campo de sexo no puede contener etiquetas HTML.");
+            return false;
+        }
+        if (sexo === "") {
+            alert("Por favor, seleccione su sexo.");
+            return false;
+        }
 
-// Validar deporte favorito
-var deporte = form.deporte.value;
-if (Etiquetas.test(deporte)) {
-    alert("El campo de deporte no puede contener etiquetas HTML.");
-    return false;
-}
-if (deporte === "ninguno") {
-    alert("Por favor, seleccione un deporte favorito.");
-    return false;
-}
+        // Validar deporte favorito
+        var deporte = form.deporte.value;
+        if (Etiquetas.test(deporte)) {
+            alert("El campo de deporte no puede contener etiquetas HTML.");
+            return false;
+        }
+        if (deporte === "ninguno") {
+            alert("Por favor, seleccione un deporte favorito.");
+            return false;
+        }
 
-//Validación
-alert("Registro exitoso. Nombre: " + nombre);
-return true;
-}
+        //Validación
+        alert("Registro exitoso. Nombre: " + nombre);
+        return true;
+    }
 
 </script>
+
 </html>
