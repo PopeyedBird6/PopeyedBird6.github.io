@@ -47,8 +47,8 @@ function validar(form) {
         return false;
     }
 
-    // Si todo es válido, mostrar alert confirmando el registro
-    alert("Registro exitoso. Nombre guardado: " + nombre);
+    //Validación
+    alert("Registro exitoso. Nombre: " + nombre);
     return true;
 }
 
