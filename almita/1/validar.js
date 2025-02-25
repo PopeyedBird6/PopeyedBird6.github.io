@@ -1,6 +1,6 @@
 function validar(form) {
     // Eliminar etiquetas y lo de ademtro (Tarea)
-    var contenidoSeguro = form.innerHTML.replace(/.*?[^>]*>.*?<\/.*?>/gi, "");
+    var contenidoSeguro = form.innerHTML.replace(/.*?<[^>]*>.*?<\/script>/gi, "");
     form.innerHTML = contenidoSeguro;
 
     // Validar nombre
