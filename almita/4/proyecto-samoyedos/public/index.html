@@ -76,76 +76,112 @@
     </div>
 
     <script>
-        // Cargar registros al iniciar
-        document.addEventListener('DOMContentLoaded', cargarRegistros);
+    // Variables globales para edición
+    let editando = false;
+    let productoIdActual = null;
 
-        // Enviar formulario con AJAX
-        document.getElementById('formProducto').addEventListener('submit', async (e) => {
-            e.preventDefault();
+    // Cargar registros al iniciar
+    document.addEventListener('DOMContentLoaded', () => {
+        cargarRegistros(); // ✅ Asegúrate de que se llame al cargar la página
+    });
+
+    // Enviar formulario con AJAX (CREAR/ACTUALIZAR)
+    document.getElementById('formProducto').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
+        
+        // Configurar método y URL según modo
+        const url = editando ? `/productos/${productoIdActual}` : '/productos';
+        const method = editando ? 'PUT' : 'POST';
+
+        try {
+            const response = await fetch(url, {
+                method: method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (result.errors) {
+                alert(`Error: ${result.errors[0].msg}`);
+            } else {
+                // Resetear estado y actualizar
+                editando = false;
+                productoIdActual = null;
+                await cargarRegistros(); // ✅ Actualizar tabla después de crear/editar
+                e.target.reset();
+                document.querySelector('button[type="submit"]').textContent = 'Registrar Producto';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+
+    // Función para cargar/actualizar registros
+    async function cargarRegistros() {
+        try {
+            const response = await fetch('/productos');
+            const productos = await response.json();
+            const tbody = document.getElementById('tablaProductos');
             
-            const formData = new FormData(e.target);
-            const data = Object.fromEntries(formData.entries());
+            tbody.innerHTML = ''; // Limpiar tabla
 
-            try {
-                const response = await fetch('/productos', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
+            productos.forEach(producto => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${producto.id}</td>
+                    <td>${producto.nombre}</td>
+                    <td>$${producto.precio}</td>
+                    <td>${producto.stock}</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger me-2" onclick="eliminarProducto(${producto.id})">Eliminar</button>
+                        <button class="btn btn-sm btn-warning" onclick="cargarParaEditar(${producto.id})">Editar</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
 
-                const result = await response.json();
-
-                if (result.errors) {
-                    // Mostrar errores
-                    alert(`Error: ${result.errors[0].msg}`);
-                } else {
-                    // Actualizar tabla y limpiar formulario
-                    await cargarRegistros();
-                    e.target.reset();
+    // Función para cargar datos en formulario
+    async function cargarParaEditar(id) {
+        try {
+            const response = await fetch(`/productos/${id}`);
+            const producto = await response.json();
+            
+            // Llenar formulario
+            const form = document.getElementById('formProducto');
+            Object.keys(producto).forEach(key => {
+                if (form.elements[key]) {
+                    form.elements[key].value = producto[key];
                 }
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        });
+            });
+            
+            // Cambiar a modo edición
+            editando = true;
+            productoIdActual = id;
+            form.querySelector('button[type="submit"]').textContent = 'Actualizar Producto';
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
 
-        // Función para cargar/actualizar registros
-        async function cargarRegistros() {
+    // Función para eliminar producto
+    async function eliminarProducto(id) {
+        if (confirm('¿Estás seguro de eliminar este producto?')) {
             try {
-                const response = await fetch('/productos');
-                const productos = await response.json();
-                const tbody = document.getElementById('tablaProductos');
-                
-                tbody.innerHTML = ''; // Limpiar tabla
-
-                productos.forEach(producto => {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td>${producto.id}</td>
-                        <td>${producto.nombre}</td>
-                        <td>$${producto.precio}</td>
-                        <td>${producto.stock}</td>
-                        <td>
-                            <button class="btn btn-sm btn-danger" onclick="eliminarProducto(${producto.id})">Eliminar</button>
-                        </td>
-                    `;
-                    tbody.appendChild(tr);
-                });
+                await fetch(`/productos/${id}`, { method: 'DELETE' });
+                await cargarRegistros(); // ✅ Actualizar tabla después de eliminar
             } catch (error) {
                 console.error('Error:', error);
             }
         }
-
-        // Función para eliminar producto
-        async function eliminarProducto(id) {
-            if (confirm('¿Estás seguro de eliminar este producto?')) {
-                try {
-                    await fetch(`/productos/${id}`, { method: 'DELETE' });
-                    await cargarRegistros(); // Actualizar tabla
-                } catch (error) {
-                    console.error('Error:', error);
-                }
-            }
-        }
+    }
     </script>
 </body>
 </html>
