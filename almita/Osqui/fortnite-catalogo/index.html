@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Armas de Fortnite</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1 class="mt-5">Catálogo de Armas de Free Fire 🔥</h1>
+
+    <h2 class="mt-4">Registrar Nueva Arma</h2>
+    <form action="/armas" method="POST">
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" required>
+      </div>
+      <div class="form-group">
+        <label for="tipo">Tipo</label>
+        <input type="text" class="form-control" id="tipo" name="tipo" required>
+      </div>
+      <div class="form-group">
+        <label for="daño">Daño</label>
+        <input type="number" class="form-control" id="daño" name="daño" required>
+      </div>
+      <div class="form-group">
+        <label for="rareza">Rareza</label>
+        <input type="text" class="form-control" id="rareza" name="rareza" required>
+      </div>
+      <div class="form-group">
+        <label for="municion">Munición</label>
+        <input type="number" class="form-control" id="municion" name="municion" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Registrar Arma</button>
+    </form>
+
+    <h2 class="mt-5">Armas Registradas</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Tipo</th>
+          <th>Daño</th>
+          <th>Rareza</th>
+          <th>Munición</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="armas-list">
+        <!-- Las armas registradas se mostrarán aquí -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // Función para cargar las armas
+    async function cargarArmas() {
+      const response = await fetch('/armas');
+      const armas = await response.json();
+      const tableBody = document.getElementById('armas-list');
+      tableBody.innerHTML = '';
+      armas.forEach(arma => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${arma.id}</td>
+          <td>${arma.nombre}</td>
+          <td>${arma.tipo}</td>
+          <td>${arma.daño}</td>
+          <td>${arma.rareza}</td>
+          <td>${arma.municion}</td>
+          <td><button class="btn btn-danger" onclick="eliminarArma(${arma.id})">Eliminar</button></td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    // Función para eliminar un arma
+    async function eliminarArma(id) {
+      await fetch(`/armas/${id}`, {
+        method: 'DELETE',
+      });
+      cargarArmas();
+    }
+
+    // Cargar armas al iniciar la página
+    window.onload = cargarArmas;
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
