@@ -32,7 +32,7 @@ db.connect((err) => {
 // ======================
 // Validaciones
 // ======================
-const htmlRegex = /^[^<>]*$/;  // 🛡️ Bloquea etiquetas HTML
+const htmlRegex = /^[^<>]*$/;  //  Bloquea etiquetas HTML
 
 const validarProducto = [
   body('nombre').trim().notEmpty().withMessage('Nombre es requerido').matches(htmlRegex).escape(),

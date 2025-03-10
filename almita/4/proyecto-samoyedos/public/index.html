@@ -14,7 +14,7 @@
     <div class="container mt-5">
         <h1 class="mb-4">🐾 Productos para Samoyedos</h1>
 
-        <!-- Formulario de Registro -->
+       
         <form id="formProducto" class="mb-5 border p-4 rounded">
             <div class="row g-3">
                 <div class="col-md-6">
@@ -69,7 +69,7 @@
                     </tr>
                 </thead>
                 <tbody id="tablaProductos">
-                    <!-- Los registros se cargarán aquí -->
+                    <!-- Los registros se cargan aquí -->
                 </tbody>
             </table>
         </div>
@@ -82,7 +82,7 @@
 
     // Cargar registros al iniciar
     document.addEventListener('DOMContentLoaded', () => {
-        cargarRegistros(); // ✅ Asegúrate de que se llame al cargar la página
+        cargarRegistros();
     });
 
     // Enviar formulario con AJAX (CREAR/ACTUALIZAR)
@@ -111,7 +111,7 @@
                 // Resetear estado y actualizar
                 editando = false;
                 productoIdActual = null;
-                await cargarRegistros(); // ✅ Actualizar tabla después de crear/editar
+                await cargarRegistros(); 
                 e.target.reset();
                 document.querySelector('button[type="submit"]').textContent = 'Registrar Producto';
             }
@@ -176,7 +176,7 @@
         if (confirm('¿Estás seguro de eliminar este producto?')) {
             try {
                 await fetch(`/productos/${id}`, { method: 'DELETE' });
-                await cargarRegistros(); // ✅ Actualizar tabla después de eliminar
+                await cargarRegistros(); //Actualizar tabla después de eliminar
             } catch (error) {
                 console.error('Error:', error);
             }
