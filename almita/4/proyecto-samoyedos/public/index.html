@@ -143,7 +143,6 @@
             </div>
         </form>
 
-        <!-- Tabla de Productos -->
         <div class="table-responsive">
             <h3 class="text-center">Lista de Productos</h3>
             <table class="table table-striped">
@@ -157,30 +156,25 @@
                     </tr>
                 </thead>
                 <tbody id="tablaProductos">
-                    <!-- Los registros se cargan aquí -->
                 </tbody>
             </table>
         </div>
     </div>
 
     <script>
-    // Variables globales para edición
     let editando = false;
     let productoIdActual = null;
 
-    // Cargar registros al iniciar
     document.addEventListener('DOMContentLoaded', () => {
         cargarRegistros();
     });
 
-    // Enviar formulario con AJAX (CREAR/ACTUALIZAR)
     document.getElementById('formProducto').addEventListener('submit', async (e) => {
         e.preventDefault();
         
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData.entries());
         
-        // Configurar método y URL según modo
         const url = editando ? `/productos/${productoIdActual}` : '/productos';
         const method = editando ? 'PUT' : 'POST';
 
@@ -196,7 +190,6 @@
             if (result.errors) {
                 alert(`Error: ${result.errors[0].msg}`);
             } else {
-                // Resetear estado y actualizar
                 editando = false;
                 productoIdActual = null;
                 await cargarRegistros(); 
@@ -208,14 +201,13 @@
         }
     });
 
-    // Función para cargar/actualizar registros
     async function cargarRegistros() {
         try {
             const response = await fetch('/productos');
             const productos = await response.json();
             const tbody = document.getElementById('tablaProductos');
             
-            tbody.innerHTML = ''; // Limpiar tabla
+            tbody.innerHTML = ''; 
 
             productos.forEach(producto => {
                 const tr = document.createElement('tr');
@@ -236,13 +228,11 @@
         }
     }
 
-    // Función para cargar datos en formulario
     async function cargarParaEditar(id) {
         try {
             const response = await fetch(`/productos/${id}`);
             const producto = await response.json();
             
-            // Llenar formulario
             const form = document.getElementById('formProducto');
             Object.keys(producto).forEach(key => {
                 if (form.elements[key]) {
@@ -250,7 +240,6 @@
                 }
             });
             
-            // Cambiar a modo edición
             editando = true;
             productoIdActual = id;
             form.querySelector('button[type="submit"]').textContent = 'Actualizar Producto';
@@ -259,12 +248,12 @@
         }
     }
 
-    // Función para eliminar producto
+
     async function eliminarProducto(id) {
         if (confirm('¿Estás seguro de eliminar este producto?')) {
             try {
                 await fetch(`/productos/${id}`, { method: 'DELETE' });
-                await cargarRegistros(); //Actualizar tabla después de eliminar
+                await cargarRegistros();
             } catch (error) {
                 console.error('Error:', error);
             }
