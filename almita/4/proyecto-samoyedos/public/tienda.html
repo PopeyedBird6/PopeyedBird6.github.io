@@ -100,8 +100,16 @@
     </style>
 </head>
 <body>
+    <script>
+        if (!sessionStorage.getItem('usuarioLogueado')) {
+            alert('Debes iniciar sesión para acceder a esta página.');
+            window.location.href = '/';
+        }
+    </script>
+
     <div class="container">
         <h1>🐾 Productos para Samoyedos</h1>
+        <button id="logoutButton" class="btn btn-danger mb-3">Cerrar Sesión</button>
 
         <form id="formProducto" class="form-container">
             <div class="row g-3">
@@ -259,6 +267,20 @@
             }
         }
     }
+
+    document.getElementById('logoutButton').addEventListener('click', async () => {
+        try {
+            const response = await fetch('/logout', { method: 'GET' });
+            if (response.ok) {
+                sessionStorage.removeItem('usuarioLogueado'); 
+                window.location.href = '/'; 
+            } else {
+                alert('Error al cerrar sesión. Inténtalo de nuevo.');
+            }
+        } catch (error) {
+            console.error('Error al cerrar sesión:', error);
+        }
+    });
     </script>
 </body>
 </html>

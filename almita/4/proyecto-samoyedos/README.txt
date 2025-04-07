@@ -16,6 +16,21 @@ INSTRUCCIONES DE INSTALACIÓN
         color VARCHAR(50) NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
+    CREATE TABLE usuarios (
+        id INT NOT NULL AUTO_INCREMENT,
+        username VARCHAR(50) NOT NULL UNIQUE,
+        password VARCHAR(255) NOT NULL,
+        fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (id)
+    );
+    CREATE TABLE sessions (
+        session_id VARCHAR(128) NOT NULL,
+        expires INT UNSIGNED NOT NULL,
+        data MEDIUMTEXT,
+        PRIMARY KEY (session_id)
+    );
+
+
 -En los archivos js buscar el comentario "// ******PROFE AQUÍ********* " y poner los datos correspondientes, puerto, user, contraseña de la base de datos.
 -Abrir la terminal y posicionarse en la carpeta raiz del proyecto.
 -npm i
